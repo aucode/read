@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.CollectDao">
+<!-- SSM now 获取当前时间-->
+	<!-- 查询tb_collect 表所有的数据 -->
+	<select id="getAllCollect" resultType="collect">
+		SELECT * FROM tb_collect
+	</select>
+	
+
+	<!-- 3.根据书籍id查找 -->
+	<select id="getCollectByBooksid" resultType="collect" parameterType="int">
+		SELECT * FROM tb_collect WHERE books_id = #{value}
+	</select>
+	
+	<!-- 2.根据用户id查找 -->
+	<select id="getCollectByUserid" resultType="collect" parameterType="int">
+		SELECT * FROM tb_collect WHERE uses_id = #{value}
+	</select>
+	
+	<!-- 4.添加一条记录  -->
+	<insert id="addCollect"  parameterType="collect">
+		INSERT INTO tb_collect (uses_id, books_id, booksinfo_id) 
+		VALUES (#{uses_id},#{books_id},#{booksinfo_id});
+	</insert>
+	<!-- 5.删除一条记录  -->
+	<delete id="deleteCollect"  parameterType="collect">
+		DELETE FROM tb_collect WHERE id = #{id}
+	</delete>
+  
+	<!-- 3.根据id查找 -->
+	<select id="getCollectByid"  resultType="int" parameterType="int">
+		SELECT count(1) FROM tb_collect WHERE id = #{value}
+	</select>
+	
+	
+	<select id="collect_byuidandbookid"  resultType="collect" parameterType="collect">
+		SELECT * FROM tb_collect WHERE uses_id = #{uses_id} AND books_id = #{books_id}
+	</select>
+
+	<update id="collect_update" parameterType="collect">
+		UPDATE tb_collect set booksinfo_id = #{booksinfo_id} WHERE id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.UserDao">
+
+	<!-- 查询tb_users 表所有的数据 -->
+	<select id="queryAllUser" resultType="users">
+		SELECT * FROM tb_users
+	</select>
+	
+
+	<!-- 根据用户名查询用户 -->
+	<select id="selectUserByUserName" resultType="int" parameterType="users">
+		SELECT count(1) FROM tb_users 
+		<where>
+		<if test="null != uses_name">
+	 			OR uses_name = #{uses_name}
+		</if>
+		<if test="null != uses_mail">
+	 			OR uses_mail = #{uses_mail}
+		</if>
+		
+		</where>
+	</select>
+	
+	<!-- 4.添加一条记录  -->
+	<insert id="addUser"  parameterType="users">
+		INSERT INTO tb_users (uses_name, uses_password, uses_mail,uses_isactivate,sex,uses_birthday) 
+		VALUES (#{uses_name},#{uses_password},#{uses_mail},0,#{sex},now());
+	</insert>
+	<update id="updUser" parameterType="books">
+		UPDATE tb_users
+		<set>
+			<if test="null != uses_name">
+	 			uses_name = #{uses_name},
+			</if>
+			<if test="null != uses_mail">
+	 			uses_password = #{uses_password},
+			</if>
+			<if test="null != uses_mail">
+	 			uses_mail = #{uses_mail},
+			</if>
+			<if test="null != uses_isactivate">
+	 			uses_isactivate = #{uses_isactivate},
+			</if>
+			<if test="null != sex">
+	 			sex = #{sex}
+			</if>
+		
+		</set>
+		WHERE uses_id = #{uses_id}
+	</update>
+	<select id="queryUserByUserNameAndPwd" resultType="users" parameterType="users">
+		SELECT * FROM tb_users 
+		<where>
+		<if test="null != uses_name">
+	 			AND uses_name = #{uses_name}
+		</if>
+		<if test="null != uses_mail">
+	 			AND uses_mail = #{uses_mail}
+		</if>
+		<if test="null != uses_password">
+	 			AND uses_password = #{uses_password}
+		</if>
+		
+		</where>
+		
+		
+		
+	</select>
+  
+</mapper>

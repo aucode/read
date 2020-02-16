@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.AdminDao">
+	
+	<!-- 查询tb_admin 表所有的数据 -->
+	<select id="queryAllAdmin" resultType="admin">
+		SELECT * FROM tb_admin
+	</select>
+	<!-- 根据管理员名和密码查找管理员 -->
+	<select id="queryAdminByAdminNameAndPwd" resultType="admin" parameterType="admin">
+		SELECT * FROM tb_admin WHERE admin_name = #{admin_name} AND admin_password = #{admin_password}
+	</select>
+	
+		<!-- 4.添加一条记录  -->
+	<insert id="addAdmin"  parameterType="admin">
+		INSERT INTO tb_admin (admin_name, admin_password,admin_authority,admin_birthday) 
+		VALUES (#{admin_name},#{admin_password},#{admin_authority},now());
+	</insert>
+	<!-- 5.删除一条记录  -->
+	<delete id="deleteAdmin"  parameterType="admin">
+		DELETE FROM tb_admin WHERE admin_id = #{admin_id}
+	</delete>
+	
+	
+	
+	
+	
+	
+		
+</mapper>

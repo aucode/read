@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.CategoryDao">
+
+	<!-- 查询tb_category 表所有的数据 -->
+	<select id="getAllCategory" resultType="category">
+		SELECT * FROM tb_category
+	</select>
+	<insert id="addcategory" parameterType="category">
+		INSERT INTO tb_category (category_title) 
+		VALUES (#{category_title});
+	</insert>
+	<delete id="deletecategory" parameterType="category">
+		DELETE FROM tb_category WHERE id = #{id}
+	</delete>
+
+  
+</mapper>

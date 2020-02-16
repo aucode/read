@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.CriticDao">
+<!-- SSM now 获取当前时间-->
+	
+	
+
+	<!-- 3.根据书籍id查找 -->
+	<select id="selectbydebateid" resultType="critic" parameterType="critic">
+		SELECT * FROM tb_critic WHERE books_id = #{books_id} ORDER BY id DESC
+	</select>
+	
+	
+	<!-- 4.添加一条记录  -->
+	<insert id="addCritic"  parameterType="critic">
+		INSERT INTO tb_critic (books_id, user_id, user_name,critic_context) 
+		VALUES (#{books_id},#{user_id},#{user_name},#{critic_context});
+	</insert>
+	
+</mapper>

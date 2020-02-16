@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.ActivityDao">
+<!-- SSM now 获取当前时间-->
+	<!-- 查询tb_activity 表所有的数据 -->
+	<select id="queryAllActivity" resultType="activity">
+		SELECT * FROM tb_activity
+	</select>
+	
+
+	<!-- 3.获取最新的5条 -->
+	<select id="queryNewActivity" resultType="activity">
+		SELECT * FROM tb_activity ORDER BY id DESC limit 5;
+	</select>
+	
+
+	
+	<!-- 4.添加一条记录  -->
+	<insert id="addActivity"  parameterType="activity">
+		INSERT INTO tb_activity (activity_title, activity_ing, activity_details) 
+		VALUES (#{activity_title},#{activity_ing},#{activity_details});
+	</insert>
+	<!-- 5.删除一条记录  -->
+	<delete id="deleteActivity"  parameterType="activity">
+		DELETE FROM tb_activity WHERE id = #{id}
+	</delete>
+  
+	<!-- 3.根据id查找 -->
+	<select id="getActivityByid"  resultType="activity" parameterType="int">
+		SELECT * FROM tb_activity WHERE id = #{value}
+	</select>
+</mapper>

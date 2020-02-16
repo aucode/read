@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    
+
+	<!-- 
+		扫描包
+	 -->
+	 <context:component-scan base-package="top.auread.service"></context:component-scan>
+
+	<!-- 
+		读取配置文件内容 
+		jdbc.properties 文件配置数据库连接信息
+	 -->
+	 <context:property-placeholder location="classpath:jdbc.properties"/>
+
+	<!-- 
+		创建数据库连接池 
+	 -->
+	 <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+	 	<property name="url" value="${jdbc.jdbcUrl}"></property>
+	 	<property name="username" value="${jdbc.user}"></property>
+	 	<property name="password" value="${jdbc.password}"></property>
+	 </bean>
+	 
+	 <!-- 
+	 	创建sqlSessionFactory 
+	 	SqlMapConfig.xml  MyBatis核心配置文件
+	  -->
+	  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  	<property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
+	 	<property name="dataSource" ref="dataSource"></property>
+	 	<!-- 将value 包下 所有的类起一个别名 （注意第一个字母为小写）   -->
+	 	<property name="typeAliasesPackage" value="top.auread.entity"></property>
+	  </bean>
+	 <!-- 
+	 	扫描mapper文件
+	  -->
+	  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  	<property name="basePackage" value="top.auread.dao"></property>
+	  </bean>
+
+</beans>

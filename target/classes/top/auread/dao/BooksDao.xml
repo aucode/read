@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.BooksDao">
+
+	<!-- 查询tb_books 表所有的数据 -->
+	<select id="queryAllBkoos" resultType="books">
+		SELECT * FROM tb_books
+	</select>
+	<select id="queryBkoosByID" resultType="books" parameterType="books">
+		SELECT * FROM tb_books WHERE id = #{id}
+	</select>
+	<select id="getbookbyid" resultType="books" parameterType="books">
+		SELECT * FROM tb_books WHERE users_id = #{users_id}
+	</select>
+	<!-- 最新8条 -->
+	<select id="getBooksNew" resultType="books">
+		SELECT * FROM tb_books ORDER
+		BY id DESC limit 8;
+	</select>
+	<!-- 点击最高8条 books_count -->
+	<select id="getBooksClickCount" resultType="books">
+		SELECT * FROM
+		tb_books ORDER BY books_count DESC limit 8;
+	</select>
+	<!-- 收藏量最高8条 collect_count -->
+	<select id="getBooksCollectCount" resultType="books">
+		SELECT * FROM
+		tb_books ORDER BY collect_count DESC limit 8;
+	</select>
+	<!-- 类型查找 -->
+	<select id="getBooksCategoryId" resultType="books"
+		parameterType="int">
+		SELECT * FROM tb_books WHERE category_id = #{value}
+	</select>
+	<!-- 类型查找（返回条数） -->
+	<select id="getCategoryIdCount" parameterType="books"
+		resultType="int">
+		SELECT count(1) FROM tb_books WHERE category_id =#{category_id}
+	</select>
+	<!-- 根据商品Id或者商品名查询商品 -->
+	<select id="searchBooksByPage" resultType="books"
+		parameterType="books">
+		SELECT * FROM tb_books WHERE books_title LIKE
+		'%${books_title}%'
+	</select>
+	
+	<update id="updateBooksStatus" parameterType="books">
+		UPDATE tb_books
+		<set>
+			<if test="null != books_count">
+	 			books_count = #{books_count},
+			</if>
+			<if test="null != books_action">
+	 			books_action = #{books_action},
+			</if>
+			<if test="null != collect_count">
+	 			collect_count = #{collect_count}
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	
+	
+		<!-- 4.添加一条记录  -->
+	<insert id="addBooks"  parameterType="books">
+		INSERT INTO tb_books (books_title,books_time,author,books_Introduction,books_action,books_count,collect_count,users_id,booksinfo_id,category_id) 
+		VALUES (#{books_title},now(),#{author},#{books_Introduction},1,0,0,#{users_id},#{booksinfo_id},#{category_id});
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

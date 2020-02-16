@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.auread.dao.BooksinfoDao">
+	
+	
+	<!-- 3.根据id查找 -->
+	<select id="getBooksinfoBybookid"  resultType="booksinfo" parameterType="int">
+		SELECT * FROM tb_booksinfo WHERE books_id = #{value}
+	</select>
+	<!-- 3.根据id查找 -->
+	<select id="getBooksinfoById"  resultType="booksinfo" parameterType="int">
+		SELECT * FROM tb_booksinfo WHERE id = #{value}
+	</select>
+	<!-- 根据书籍id排序返回第一个 -->
+	<select id="getIdByBookid"  resultType="booksinfo" parameterType="booksinfo">
+		SELECT id FROM tb_booksinfo WHERE books_id = #{books_id} ORDER BY id ASC limit 1;
+	</select>
+	
+	<!-- 4.添加一条记录  -->
+	<insert id="addbooksinfo"  parameterType="booksinfo">
+		INSERT INTO tb_booksinfo (booksinfo_title,booksinfo_context, books_id,users_id) 
+		VALUES (#{booksinfo_title},#{booksinfo_context},#{books_id},#{users_id});
+	</insert>
+	
+	
+	
+	
+</mapper>
