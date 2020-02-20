@@ -35,8 +35,7 @@ public class UserController {
 	@RequestMapping("/testlogin.do")
 	public HigherReaponse<Users> testadmin(HttpServletRequest request){
 		HttpSession session = request.getSession();
-	Users attribute = (Users) session.getAttribute("user");
-		System.out.println(attribute);
+		Users attribute = (Users) session.getAttribute("user");
 		return HigherReaponse.getHigherReaponseSuccess(attribute);
 		
 	}
@@ -83,7 +82,6 @@ public class UserController {
 		CodeUtil ivc = new CodeUtil();     //用我们的验证码类，生成验证码类对象
 		BufferedImage image = ivc.getImage();  //获取验证码
 		request.getSession().setAttribute("textCode", ivc.getText()); //将验证码的文本存在session中 
-		//textCode = ivc.getText();
 		ivc.output(image, response.getOutputStream());//将验证码图片响应给客户端
     }
 	@RequestMapping("/verificationCode.do")

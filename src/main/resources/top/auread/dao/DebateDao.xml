@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="top.auread.dao.DebateDao">
+  
+  	<update id="updateDebate">
+		UPDATE tb_debate SET  debate_count = debate_count + 1 WHERE debate_context = date_format(now(),'%d');
+	</update>
+	
+	<select id="getDebatesAll" resultType="debate">
+		SELECT * FROM tb_debate
+	</select>
+	
+	
+	
+	
+	
+  </mapper>
+  

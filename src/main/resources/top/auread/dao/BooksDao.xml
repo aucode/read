@@ -42,8 +42,7 @@
 	<!-- 根据商品Id或者商品名查询商品 -->
 	<select id="searchBooksByPage" resultType="books"
 		parameterType="books">
-		SELECT * FROM tb_books WHERE books_title LIKE
-		'%${books_title}%'
+		SELECT * FROM tb_books WHERE books_title LIKE '%${books_title}%' OR author LIKE '%${books_title}%'
 	</select>
 	
 	<update id="updateBooksStatus" parameterType="books">

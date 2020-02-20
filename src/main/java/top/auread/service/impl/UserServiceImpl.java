@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 
 import top.auread.common.HigherReaponse;
 import top.auread.common.MailContents;
+import top.auread.dao.DebateDao;
 import top.auread.dao.UserDao;
 import top.auread.entity.Users;
 import top.auread.service.UserService;
@@ -33,6 +34,8 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired //注解  @Autowired 再容器里自动找UserDao对象
 	private UserDao userDao;
+	@Autowired //注解  @Autowired 再容器里自动找UserDao对象
+	private  DebateDao debateDao;
 	
 	private HttpServletRequest request;
 	
@@ -72,7 +75,7 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		session.setAttribute("user", queryUserByUserNameAndPwd);
-		
+		debateDao.updateDebate();
 		return HigherReaponse.getHigherReaponseSuccess(queryUserByUserNameAndPwd);
 	}
 	/**
