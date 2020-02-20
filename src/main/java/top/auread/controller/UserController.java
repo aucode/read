@@ -117,7 +117,8 @@ public class UserController {
 	@RequestMapping("/isactivate.do")
 	public String isactivate(Users user){
 		user.setUses_isactivate(1);
-		 userService.updUser(user);
+		 System.out.println("Controller激活账户"+user.toString());
+		 userService.isactivate(user);
 		 return "<!DOCTYPE html>\r\n" + 
 		 		"<html>\r\n" + 
 		 		"<head>\r\n" + 

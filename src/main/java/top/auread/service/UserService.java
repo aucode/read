@@ -30,4 +30,6 @@ public interface UserService {
 	HigherReaponse<Object> addUser(Users users)throws AddressException, IOException, MessagingException ;
 	//4.更新
 	HigherReaponse<Object> updUser(Users users);
+	//激活账户 
+	HigherReaponse<Object> isactivate(Users users);
 }

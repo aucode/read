@@ -166,9 +166,7 @@ public class BooksServiceImpl implements BooksService {
 		if (false == addActivity) {
 			return HigherReaponse.getHigherReaponseFailed("添加失败。。。");
 		}
-		// 生成图片
 		
-		// String url = request.getSession().getServletContext().getRealPath("/upload");
 		file.transferTo(new File(MailContents.IMG_URL+"/"+imgName));
 
 		return HigherReaponse.getHigherReaponseSuccess(addActivity);

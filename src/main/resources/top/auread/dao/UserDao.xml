@@ -20,7 +20,6 @@
 		<if test="null != uses_mail">
 	 			OR uses_mail = #{uses_mail}
 		</if>
-		
 		</where>
 	</select>
 	
@@ -35,7 +34,7 @@
 			<if test="null != uses_name">
 	 			uses_name = #{uses_name},
 			</if>
-			<if test="null != uses_mail">
+			<if test="null != uses_password">
 	 			uses_password = #{uses_password},
 			</if>
 			<if test="null != uses_mail">

@@ -141,33 +141,43 @@ public class UserServiceImpl implements UserService{
 	public HigherReaponse<Object> updUser(Users users) {
 
 		
-		
 		if(null == userDao) {
 			return HigherReaponse.getHigherReaponseFailed("服务器异常。。。");
 		}
-		int selectUserByUserName = userDao.selectUserByUserName(users);
-		if(selectUserByUserName != 0) {
-			return HigherReaponse.getHigherReaponseFailed("用户名或邮箱重复。");
+		if(null != users.getUses_name() || null != users.getUses_mail()) {
+			int selectUserByUserName = userDao.selectUserByUserName(users);
+			if(selectUserByUserName != 0) {
+				return HigherReaponse.getHigherReaponseFailed("用户名或邮箱重复。");
+			}
 		}
+		
 		if(null == users.getUses_id()) {
 			return HigherReaponse.getHigherReaponseFailed("数据错误。。。");
 		}
-		String md5 = Md5Tools.MD5(users.getUses_password());
-		if(null == md5) {
-			return HigherReaponse.getHigherReaponseFailed("密码空，加密失败。");
+		if(null != users.getUses_password()) {
+			String md5 = Md5Tools.MD5(users.getUses_password());
+			if(null == md5) {
+				return HigherReaponse.getHigherReaponseFailed("密码空，加密失败。");
+			}
+			users.setUses_password(md5);
 		}
-		users.setUses_password(md5);
-		Boolean updUser = userDao.updUser(users);
 		
+		Boolean updUser = userDao.updUser(users);
 		if(updUser) {
 			return HigherReaponse.getHigherReaponseSuccess("更新成功");
 		}else {
 			return HigherReaponse.getHigherReaponseFailed("更新失败。。。");
-			
 		}
 		
 		
 		
+	}
+
+	@Override
+	public HigherReaponse<Object> isactivate(Users users) {
+		// TODO Auto-generated method stub
+			userDao.updUser(users);
+		return HigherReaponse.getHigherReaponseSuccess("激活成功");
 	}
 
 
