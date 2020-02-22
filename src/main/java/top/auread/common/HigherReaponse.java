@@ -97,8 +97,17 @@ public class HigherReaponse<T> {
 		return new HigherReaponse(StatusUtil.FAILED_STATUS,msg);
 	}
 
-
-
+	//Not logged in
+	@JsonIgnore
+	public Boolean isnotLoggedIn() {
+		return this.status == StatusUtil.FAILED_NOT_LOGGED_IN_STATUS;
+	}
+	public static HigherReaponse getgetHigherReaponseNotLoggedInFailed() {
+		return new HigherReaponse(StatusUtil.FAILED_NOT_LOGGED_IN_STATUS);
+	}
+	public static HigherReaponse getgetHigherReaponseNotLoggedInFailed(String msg) {
+		return new HigherReaponse(StatusUtil.FAILED_NOT_LOGGED_IN_STATUS);
+	}
 
 
 	
